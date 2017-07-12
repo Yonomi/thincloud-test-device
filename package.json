@@ -1,0 +1,52 @@
+{
+  "name": "@yonomi/thincloud-test-device",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Yonomi Thincloud Test Device",
+  "author": "Yonomi (http://yonomi.co)",
+  "license": "SEE LICENSE IN LICENSE",
+  "homepage": "https://github.com/yonomi/thincloud-test-device#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yonomi/thincloud-test-device.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yonomi/thincloud-test-device/issues"
+  },
+  "engines": {
+    "node": "6.10.x",
+    "npm": "5.x.x"
+  },
+  "main": "server.js",
+  "scripts": {
+    "bithound": "bithound check ${BITHOUND_TOKEN}",
+    "codecov": "codecov",
+    "lint": "eslint .",
+    "posttest": "npm run security-check",
+    "security-check": "nsp check --output summary",
+    "start": "node server.js",
+    "test": "npm run lint && jest",
+    "test-ci": "npm run lint && npm run test-coverage && npm run security-check && npm run codecov && npm run bithound",
+    "test-coverage": "jest --coverage --silent"
+  },
+  "dependencies": {
+    "throng": "4.0.0"
+  },
+  "devDependencies": {
+    "bithound": "1.7.0",
+    "codecov": "2.2.0",
+    "eslint": "4.2.0",
+    "eslint-config-standard": "10.2.1",
+    "eslint-plugin-import": "2.7.0",
+    "eslint-plugin-jest": "20.0.3",
+    "eslint-plugin-node": "5.1.0",
+    "eslint-plugin-promise": "3.5.0",
+    "eslint-plugin-standard": "3.0.1",
+    "jest": "20.0.4",
+    "nsp": "2.6.3"
+  },
+  "jest": {
+    "coverageDirectory": "./coverage/",
+    "testPathIgnorePatterns": []
+  }
+}

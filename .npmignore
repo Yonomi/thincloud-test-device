@@ -1,0 +1,11 @@
+# project files
+.editorconfig
+.eslintignore
+.eslintrc.yml
+.gitignore
+.nyc_output
+coverage
+docs
+
+# Serverless directory
+**/.serverless
