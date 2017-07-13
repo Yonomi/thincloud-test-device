@@ -30,7 +30,9 @@
     "test-coverage": "jest --coverage --silent"
   },
   "dependencies": {
-    "throng": "4.0.0"
+    "throng": "4.0.0",
+    "@yonomi/thincloud-device-sdk": "git+ssh://git@github.com/Yonomi/thincloud-device-sdk.git#develop",
+    "aws-sdk": "2.83.0"
   },
   "devDependencies": {
     "bithound": "1.7.0",
