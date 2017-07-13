@@ -32,7 +32,8 @@
   "dependencies": {
     "throng": "4.0.0",
     "@yonomi/thincloud-device-sdk": "git+https://f0646aea2908884e669ae1c33c1363f020bb4da8:x-oauth-basic@github.com/Yonomi/thincloud-device-sdk.git#develop",
-    "aws-sdk": "2.83.0"
+    "aws-sdk": "2.83.0",
+    "express": "^4.15.3"
   },
   "devDependencies": {
     "bithound": "1.7.0",
