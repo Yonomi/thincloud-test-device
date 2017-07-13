@@ -4,7 +4,7 @@ const config = require('./config/device.config.js');
 //const sdk = require('./src/thincloud-device-sdk');
 const sdk = require('@yonomi/thincloud-device-sdk');
 
-const app = require('express');
+let app = require('express')();
 let PORT = process.env.PORT || 8082;
 
 module.exports = class Device {
@@ -26,6 +26,9 @@ module.exports = class Device {
       }, 10000);
     }, (err) => {
 
+    });
+    app.get('/', function (req, res) {
+      res.send('Hello World!')
     })
 
     app.listen(PORT, ()=>{
