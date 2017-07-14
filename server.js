@@ -6,6 +6,9 @@ const Device = require('./device');
 const WORKERS = process.env.WEB_CONCURRENCY || 1;
 const PORT = process.env.PORT || 3000;
 
+let app = require('express')();
+let PORT = process.env.PORT || 8082;
+
 const clusterConfig = {
   workers: WORKERS,
   lifetime: Infinity,
@@ -29,6 +32,14 @@ function startWorker(workerId) {
     id: workerId,
     port: PORT
   });
+
+  app.get('/', function (req, res) {
+    res.send('Hello World!')
+  })
+
+  app.listen(PORT, ()=>{
+    console.log('Listening on', PORT);
+  })
 
   process.on('SIGINT', () => {});
   process.on('SIGTERM', () => {
