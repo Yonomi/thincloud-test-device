@@ -1,28 +1,28 @@
 'use strict';
 
-//region imports
-const device_config = require('./device.config.json');
-//endregion
+// region imports
+const deviceConfig = require('./device.config.json');
+// endregion
 
 class Config {
 
-  static get device(){
+  static get device() {
     return {
-      keyPath: device_config.certs.keyPath,
-      certPath: device_config.certs.certPath,
-      caPath: device_config.certs.caPath,
-      clientId: device_config.iotConnection.clienId,
-      region: device_config.iotConnection.region,
-      physicalId: device_config.physicalId,
-      deviceType: device_config.deviceType,
-      shadow: device_config.iotConnection.shadow,
-      timeoutCommission: device_config.timeoutCommission,
-      timeoutRequest: device_config.timeoutRequest
-    }
+      keyPath: deviceConfig.certs.keyPath,
+      certPath: deviceConfig.certs.certPath,
+      caPath: deviceConfig.certs.caPath,
+      clientId: deviceConfig.iotConnection.clienId,
+      region: deviceConfig.iotConnection.region,
+      physicalId: deviceConfig.physicalId,
+      deviceType: deviceConfig.deviceType,
+      shadow: deviceConfig.iotConnection.shadow,
+      timeoutCommission: deviceConfig.timeoutCommission,
+      timeoutRequest: deviceConfig.timeoutRequest
+    };
   }
 
-};
+}
 
-//region exports
+// region exports
 module.exports = Config;
-//endregion
+// endregion
