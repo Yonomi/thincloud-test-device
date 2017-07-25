@@ -1,0 +1,19 @@
+{
+  "deviceType": "mock",
+  "physicalId": "100000",
+  "requestTimeout": 5000,
+  "log": {
+    "level": "debug"
+  },
+  "certs": {
+    "keyPath": "certs/private.pem.key",
+    "certPath": "certs/certificate.pem.crt",
+    "caPath": "rootCA.pem"
+  },
+  "iotConnection": {
+    "shadow": true,
+    "port": 8883,
+    "host": "a28itbge4bjvi5.iot.us-west-2.amazonaws.com",
+    "region": "us-west-2"
+  }
+}
