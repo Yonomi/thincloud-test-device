@@ -1,5 +1,5 @@
 {
-  "deviceType": "BR400",
+  "deviceType": "mock",
   "physicalId": "100000",
   "requestTimeout": 5000,
   "log": {

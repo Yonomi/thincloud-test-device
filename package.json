@@ -38,7 +38,8 @@
     "express": "4.15.3",
     "helmet": "3.6.1",
     "throng": "4.0.0",
-    "uuid-1345": "0.99.6"
+    "uuid-1345": "0.99.6",
+    "nconf": "^0.8.4"
   },
   "devDependencies": {
     "bithound": "1.7.0",

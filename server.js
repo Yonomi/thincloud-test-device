@@ -1,16 +1,17 @@
 'use strict';
 
 global.Promise = require('bluebird');
-
+const os = require('os');
 //
 
 const throng = require('throng');
-const Device = require('./lib/device');
 const logger = require('./lib/utils/logger');
+const DeviceManager = require('./lib/device.manager');
 
 const WORKERS = process.env.WEB_CONCURRENCY || 1;
 const PORT = process.env.PORT || 3000;
 const HEROKU_INFO = getHerokuInfo(process.env);
+const HOST_NAME = os.hostname();
 
 const clusterConfig = {
   workers: WORKERS,
@@ -22,41 +23,36 @@ const clusterConfig = {
 
 throng(clusterConfig);
 
-//
 
 function startMaster() {
-  logger.info({ WORKERS, HEROKU_INFO }, 'master spawing workers');
+  logger.info({WORKERS, HEROKU_INFO}, 'master spawing workers');
 }
 
 function startWorker(workerId) {
-  const workerLogger = logger.child({ workerId });
+  const workerLogger = logger.child({workerId});
+  workerLogger.info({workerId}, 'start worker');
 
-  workerLogger.info({ workerId }, 'start worker');
-
-  const device = new Device({
-    devicetype: 'mock-device',
-    physicalId: '100000', // ??? workerId?
-    deviceInfo: require('./config/device.config').device, // ???
-    connection: {
-      host: 'a28itbge4bjvi5.iot.us-west-2.amazonaws.com',
-      region: 'us-west-2',
-      port: 8883,
-      shadow: true
-    },
-    pollInterval: 1 * 60 * 1000,
-    port: PORT,
-    logger: workerLogger
+  let deviceManager = new DeviceManager({
+    workerId: workerId,
+    hostName: HOST_NAME,
+    logger: workerLogger,
   });
 
   process.on('SIGINT', () => {});
+
   process.on('SIGTERM', () => {
-    workerLogger.warn({ workerId }, 'worker exiting...');
-    device.disconnect().then(() => {
-      process.exit(0);
+    workerLogger.warn({workerId}, 'worker exiting...');
+    deviceManager.terminate().then(()=>{
+      workerLogger.warn({device: deviceManager.device.deviceId}, 'certificate cleared');
     });
+    setTimeout(()=>{
+      process.exit(0)
+    }, 10000)
+
   });
 
-  device.run();
+    deviceManager.init()
+
 }
 
 function getHerokuInfo(data) {
