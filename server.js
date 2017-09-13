@@ -2,7 +2,6 @@
 
 global.Promise = require('bluebird');
 const os = require('os');
-//
 
 const throng = require('throng');
 const logger = require('./lib/utils/logger');
@@ -12,6 +11,8 @@ const WORKERS = process.env.WEB_CONCURRENCY || 1;
 const PORT = process.env.PORT || 3000;
 const HEROKU_INFO = getHerokuInfo(process.env);
 const HOST_NAME = os.hostname();
+
+let WebApp = require('./lib/app');
 
 const clusterConfig = {
   workers: WORKERS,
@@ -38,6 +39,7 @@ function startWorker(workerId) {
     logger: workerLogger,
   });
 
+
   process.on('SIGINT', () => {});
 
   process.on('SIGTERM', () => {
@@ -48,12 +50,36 @@ function startWorker(workerId) {
     setTimeout(()=>{
       process.exit(0)
     }, 10000)
-
   });
 
-    deviceManager.init()
+
+
+    deviceManager.init().then((data)=>{
+      workerLogger.warn({data}, 'device init');
+      let app = new WebApp(deviceManager).start()
+    }, (err)=>{
+      workerLogger.error({err}, 'device exception');
+    })
+
+
 
 }
+
+let assoc = {
+  "accessRole": "owner",
+  "deviceId": "817d0c19-e1a4-5528-93a3-686835e10845",
+  "deviceReferenceName": "test device",
+  "userId": "00000000-0000-0000-0000-000000000001"
+};
+
+let _assoc = {
+  "accessRole": "owner",
+  "deviceId": "817d0c19-e1a4-5528-93a3-686835e10845",
+  "deviceReferenceName": "test device",
+  "userId": "10ccc9d9-3bd9-497b-91ee-be82bee4a83a"
+};
+
+  // 10ccc9d9-3bd9-497b-91ee-be82bee4a83a
 
 function getHerokuInfo(data) {
   const heroku = Object.keys(data)

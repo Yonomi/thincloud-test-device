@@ -18,7 +18,7 @@ class Config {
     this.deviceType = deviceType;
   }
 
-  static get device() {
+  get device() {
     return {
       keyPath: deviceConfig.certs.keyPath,
       certPath: deviceConfig.certs.certPath,
@@ -28,6 +28,7 @@ class Config {
       physicalId: deviceConfig.physicalId,
       deviceType: deviceConfig.deviceType,
       shadow: deviceConfig.iotConnection.shadow,
+      host: deviceConfig.iotConnection.host,
       timeoutCommission: deviceConfig.timeoutCommission,
       timeoutRequest: deviceConfig.timeoutRequest
     };
@@ -39,6 +40,7 @@ class Config {
       privateKey: new Buffer(this.privateKey),
       caCert: new Buffer(rootCa),
       region: this.region ? this.region : deviceConfig.iotConnection.region,
+      host: deviceConfig.iotConnection.host,
       clientId: `${this.deviceType}_${this.physicalId}`,
       physicalId: this.physicalId,
       deviceType: this.deviceType

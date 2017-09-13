@@ -1,9 +1,9 @@
 {
-  "deviceType": "mock",
+  "deviceType": "br400",
   "physicalId": "100000",
   "requestTimeout": 5000,
   "log": {
-    "level": "debug"
+    "level": "trace"
   },
   "certs": {
     "keyPath": "certs/private.pem.key",
@@ -13,7 +13,7 @@
   "iotConnection": {
     "shadow": true,
     "port": 8883,
-    "host": "a28itbge4bjvi5.iot.us-west-2.amazonaws.com",
+    "host": "a30sls2kwzsz93.iot.us-west-2.amazonaws.com",
     "region": "us-west-2"
   }
 }
