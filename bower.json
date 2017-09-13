@@ -1,0 +1,12 @@
+{
+  "directory": "lib/public/libs",
+  "name": "yonomi-thincloud-testdevice",
+  "version": "0.0.1",
+  "main": "./angular.js",
+  "ignore": [],
+  "dependencies": {
+    "angular":"1.6.6",
+    "angular-route": "1.6.6",
+    "materialize": "0.100.2"
+  }
+}

@@ -27,7 +27,8 @@
     "start": "node server.js",
     "test": "npm run lint && jest",
     "test-ci": "npm run lint && npm run test-coverage && npm run security-check && npm run codecov && npm run bithound",
-    "test-coverage": "jest --coverage --silent"
+    "test-coverage": "jest --coverage --silent",
+    "postinstall": "bower install"
   },
   "dependencies": {
     "@yonomi/thincloud-device-sdk": "git+https://f0646aea2908884e669ae1c33c1363f020bb4da8:x-oauth-basic@github.com/Yonomi/thincloud-device-sdk.git",
@@ -39,7 +40,8 @@
     "helmet": "3.6.1",
     "throng": "4.0.0",
     "uuid-1345": "0.99.6",
-    "nconf": "^0.8.4"
+    "nconf": "^0.8.4",
+    "aws-sdk": "^2.7.13"
   },
   "devDependencies": {
     "bithound": "1.7.0",
