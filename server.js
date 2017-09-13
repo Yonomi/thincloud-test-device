@@ -65,22 +65,6 @@ function startWorker(workerId) {
 
 }
 
-let assoc = {
-  "accessRole": "owner",
-  "deviceId": "817d0c19-e1a4-5528-93a3-686835e10845",
-  "deviceReferenceName": "test device",
-  "userId": "00000000-0000-0000-0000-000000000001"
-};
-
-let _assoc = {
-  "accessRole": "owner",
-  "deviceId": "817d0c19-e1a4-5528-93a3-686835e10845",
-  "deviceReferenceName": "test device",
-  "userId": "10ccc9d9-3bd9-497b-91ee-be82bee4a83a"
-};
-
-  // 10ccc9d9-3bd9-497b-91ee-be82bee4a83a
-
 function getHerokuInfo(data) {
   const heroku = Object.keys(data)
     .filter(k => {
