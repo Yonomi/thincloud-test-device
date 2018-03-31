@@ -5,31 +5,34 @@
       <div class="card-body">
         <div class="float-left">
           <div>
-            <span>DeviceId: </span> <span>{{device.deviceId}}</span>
+            <strong>Device Type: </strong> <span class="text-muted">{{device.devicetype}}</span>
+            <strong>physicalId: </strong> <span class="text-muted">{{device.physicalId}}</span>
           </div>
-          <div>
-            <span>Device Type: </span> <span>{{device.devicetype}}</span>
-            <span>physicalId: </span> <span>{{device.physicalId}}</span>
+
+          <div ng-if="device.isCommissioned">
+            <strong>DeviceId: </strong> <span class="text-muted">{{device.deviceId}}</span>
           </div>
+
         </div>
         <div class="float-right">
-          <span class="badge" ng-class="{'badge-success': device.isCommissioned}">Online</span>
+          <span class="badge badge-success" ng-if="device.isCommissioned" >Online</span>
+          <span class="badge badge-danger" ng-if="!device.isCommissioned">Danger</span>
         </div>
       </div>
     </div>
     <div class="" style="padding-top:30px">
       <ul class="nav nav-tabs">
         <li class="nav-item">
-          <button class="nav-link" ng-click="setTab('requests')" >Requests</button>
+          <button type="button" class="nav-link" ng-click="setTab('requests')" >Requests</button>
         </li>
         <li class="nav-item">
-          <button class="nav-link"  ng-click="setTab('commands')" >Commands</button>
+          <button type="button" class="nav-link"  ng-click="setTab('commands')" >Commands</button>
         </li>
         <li class="nav-item">
-          <button class="nav-link"  ng-click="setTab('storage')" >Storage</button>
+          <button type="button" class="nav-link"  ng-click="setTab('storage')" >Storage</button>
         </li>
         <li class="nav-item">
-          <button class="nav-link" ng-click="setTab('logs')" >Logs</button>
+          <button type="button" class="nav-link" ng-click="setTab('logs')" >Logs</button>
         </li>
       </ul>
 

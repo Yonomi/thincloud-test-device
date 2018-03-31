@@ -6,21 +6,21 @@
           Commission Virtual Device
         </div>
         <div class="card-body">
-          <form class="form" role="form" autocomplete="off" id="commissionForm" novalidate="" method="POST">
+          <div class="form" role="form" autocomplete="off" id="commissionForm" novalidate="" method="POST">
             <div class="form-group">
               <label for="host">Host</label>
-              <input type="text" class="form-control" name="uname1" id="host" required="">
+              <input type="text" class="form-control" name="host" id="host" ng-model="host" required="">
             </div>
             <div class="form-group">
               <label>Port</label>
-              <input type="number" class="form-control" id="port" required="" autocomplete="">
+              <input type="number" class="form-control" id="port" required="" ng-model="port" autocomplete="">
             </div>
             <div class="form-group">
               <label>Region</label>
-              <input type="text" class="form-control" id="region" required="" autocomplete="">
+              <input type="text" class="form-control" id="region" required="" ng-model="region" autocomplete="">
             </div>
-            <button  class="btn btn-success btn-lg"  id="btnCommission">Commission</button>
-          </form>
+            <button  class="btn btn-success btn-lg"  id="btnCommission" ng-click="commission(host, port, region)">Commission</button>
+          </div>
         </div>
       </div>
     </div>

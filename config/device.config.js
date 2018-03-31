@@ -8,11 +8,11 @@ let rootCa = fs.readFileSync(path.join(__dirname, "../rootCA.pem"), "utf-8");
 // endregion
 
 class Config {
-  constructor(credential, physicalId, deviceType, opts){
+  constructor(connectionDetails, physicalId, deviceType, opts){
     if(!opts) opts = {};
-    // this.clientCert = credential.certificatePem;
-    // this.privateKey = credential.keyPair.PrivateKey;
-    this.region = opts.region || null;
+    this.host = connectionDetails.host;
+    this.region = connectionDetails.region || null;
+    this.port = connectionDetails.port || 8883;
     this.clientId = opts.clientId || null;
     this.physicalId = physicalId;
     this.deviceType = deviceType;
@@ -24,11 +24,12 @@ class Config {
       certPath: deviceConfig.certs.certPath,
       caPath: deviceConfig.certs.caPath,
       clientId: `${deviceConfig.deviceType}_${deviceConfig.physicalId}`,
-      region: deviceConfig.iotConnection.region,
       physicalId: deviceConfig.physicalId,
       deviceType: deviceConfig.deviceType,
       shadow: deviceConfig.iotConnection.shadow,
-      host: deviceConfig.iotConnection.host,
+      host: this.host || deviceConfig.iotConnection.host,
+      port: this.port || deviceConfig.iotConnection.port,
+      region: this.region || deviceConfig.iotConnection.region,
       timeoutCommission: deviceConfig.timeoutCommission,
       timeoutRequest: deviceConfig.timeoutRequest,
       keepalive: 1800
