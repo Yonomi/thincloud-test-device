@@ -1,7 +1,8 @@
 {
   "deviceType": "br400",
-  "physicalId": "100000",
+  "physicalId": "10000",
   "requestTimeout": 5000,
+  "timeoutCommission": 40000,
   "log": {
     "level": "trace"
   },

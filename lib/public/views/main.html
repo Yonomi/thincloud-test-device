@@ -1,11 +1,101 @@
-<div class="container" ng-controller="mainCtlr">
+<div ng-controller="mainCtlr">
   <div>
     <h4>Device Information</h4>
-    <div>
-      <span>Device Type: br400</span>
+    <div class="card">
+      <div class="card-body">
+        <div class="float-left">
+          <div>
+            <span>DeviceId: </span> <span>{{device.deviceId}}</span>
+          </div>
+          <div>
+            <span>Device Type: </span> <span>{{device.devicetype}}</span>
+            <span>physicalId: </span> <span>{{device.physicalId}}</span>
+          </div>
+        </div>
+        <div class="float-right">
+          <span class="badge" ng-class="{'badge-success': device.isCommissioned}">Online</span>
+        </div>
+      </div>
     </div>
-    <div>
-      <span>Physical Id: 100000</span>
+    <div class="" style="padding-top:30px">
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <button class="nav-link" ng-click="setTab('requests')" >Requests</button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link"  ng-click="setTab('commands')" >Commands</button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link"  ng-click="setTab('storage')" >Storage</button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link" ng-click="setTab('logs')" >Logs</button>
+        </li>
+      </ul>
+
+      <div style="padding-top: 30px" >
+        <div class="container" ng-if="currentTab == 'requests'" ng-controller="requestCtlr">
+          <div class=""></div>
+          <div class="form-group row">
+            <label for="requestUrl" class="col-sm-2 col-form-label">Request Url</label>
+            <div class="col-sm-10">
+              <input ng-model="requestUrl" type="text" class="form-control" id="requestUrl" placeholder="get /devices">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="requestPayload" class="col-sm-2 col-form-label">Request Payload </label>
+            <div class="col-sm-10">
+              <textarea ng-model="requestPayload" class="form-control" id="requestPayload" rows="3"></textarea>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="responsePayload" class="col-sm-2 col-form-label">Response Payload </label>
+            <div class="col-sm-10">
+              <textarea ng-model="responsePayload" class="form-control" id="responsePayload" rows="3" disabled></textarea>
+            </div>
+          </div>
+          <button  type="submit" class="btn btn-primary float-right" ng-click="sendRequest(requestUrl, requestPayload)" ng-disabled="requestUrl == null">Submit</button>
+        </div>
+
+        <div ng-if="currentTab =='commands'" ng-controller="commandCtlr">
+          <div ng-repeat="command in commands" style="padding-bottom: 30px">
+            <div class="card">
+              <div class="card-block">
+                <div class="float-left">
+                  <h4>Method: {{command.name}}</h4>
+                  <div class="small">Id: {{command.commandId}}</div>
+                  <div class="small">UserId: {{command.userId}}</div>
+                  <div class="small">Request: {{command.request}}</div>
+                </div>
+                <div class="float-right">
+                  <span class="badge badge-primary" ng-if="command.state == 'PENDING'">Pending</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div ng-if="currentTab == 'storage'" ng-controller="storageCtlr">
+          <div ng-repeat="items in storageItems" style="padding-bottom: 30px">
+            <div class="card">
+              <div class="card-block">
+                <div class="float-left">
+                  {{items}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div ng-if="currentTab == 'logs'">
+          <div>logs</div>
+        </div>
+
+      </div>
+
+
+
+
     </div>
   </div>
 </div>

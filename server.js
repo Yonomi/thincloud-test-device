@@ -52,16 +52,13 @@ function startWorker(workerId) {
     }, 10000)
   });
 
-
-
-    deviceManager.init().then((data)=>{
+  deviceManager.init()
+    .then((data) => {
       workerLogger.warn({data}, 'device init');
       let app = new WebApp(deviceManager).start()
-    }, (err)=>{
+    }, (err) => {
       workerLogger.error({err}, 'device exception');
     })
-
-
 
 }
 

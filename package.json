@@ -21,6 +21,7 @@
   "scripts": {
     "bithound": "bithound check ${BITHOUND_TOKEN}",
     "codecov": "codecov",
+    "clean": "rimraf -r node_modules",
     "lint": "eslint .",
     "posttest": "npm run security-check",
     "security-check": "nsp check --output summary",
@@ -31,7 +32,7 @@
     "postinstall": "bower install"
   },
   "dependencies": {
-    "@yonomi/thincloud-device-sdk": "git+https://f0646aea2908884e669ae1c33c1363f020bb4da8:x-oauth-basic@github.com/Yonomi/thincloud-device-sdk.git",
+    "@yonomi/thincloud-device-sdk": "git+https://f0646aea2908884e669ae1c33c1363f020bb4da8:x-oauth-basic@github.com/Yonomi/thincloud-device-sdk.git#develop",
     "bluebird": "3.5.0",
     "body-parser": "1.17.2",
     "bunyan": "1.8.10",
