@@ -10,7 +10,7 @@ let rootCa = fs.readFileSync(path.join(__dirname, "../rootCA.pem"), "utf-8");
 class Config {
   constructor(connectionDetails, physicalId, deviceType, opts){
     if(!opts) opts = {};
-    this.host = connectionDetails.host;
+    this.host = connectionDetails.host || null;
     this.region = connectionDetails.region || null;
     this.port = connectionDetails.port || 8883;
     this.clientId = opts.clientId || null;
