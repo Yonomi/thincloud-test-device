@@ -6,6 +6,9 @@
           Commission Virtual Device
         </div>
         <div class="card-body">
+          <div class="loading-background" ng-if="isLoading">
+            <div class="loader"></div>
+          </div>
           <div class="form" role="form" autocomplete="off" id="commissionForm" novalidate="" method="POST">
             <div class="form-group">
               <label for="host">Host</label>
