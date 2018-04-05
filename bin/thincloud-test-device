@@ -20,6 +20,7 @@ program
   .option('-s, --create-config', 'Create a starter configuration file')
   .option('-p, --port', 'Set port for test device server [default is 8082]')
   .on('--help', () => {
+    console.log();
     console.log('  Example:');
     console.log();
     console.log('    $ thincloud-test-device -c /path/to/config_file.json');
