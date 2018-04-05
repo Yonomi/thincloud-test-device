@@ -110,7 +110,7 @@
           </div>
         </div>
 
-        <div ng-if="currentTab == 'state'" ng-controller="mainCtlr">
+        <div ng-if="currentTab == 'state'">
           <button type="submit" class="btn btn-success" ng-click="updateState({powerState: true})" ng-show="!device.state.powerState || device.state == {}">ON</button>
           <button type="submit" class="btn btn-danger" ng-click="updateState({powerState: false})" ng-show="device.state.powerState">OFF</button>
         </div>
