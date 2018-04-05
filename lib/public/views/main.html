@@ -2,7 +2,7 @@
   <div>
     <h4>Device Information</h4>
     <div class="card">
-      <div class="card-body">
+      <div class="card-header">
         <div class="float-left">
           <div>
             <strong>Device Type: </strong> <span class="text-muted">{{device.devicetype}}</span>
@@ -24,12 +24,14 @@
 
         </div>
       </div>
-      <div class="card-footer" ng-if="device.state">
+      <div class="card-body" ng-if="!device.state === {}">
         <div>
-          <strong>Device State:</strong>
+          <h4>Device State:</h4>
         </div>
-        <div>
-          <span class="text-muted">{{angular.json(device.state)}}</span>
+        <div class="card">
+          <div class="card-header">
+            <span class="text-muted">{{ device.state | json }}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -74,6 +76,14 @@
         </div>
 
         <div ng-if="currentTab =='commands'" ng-controller="commandCtlr">
+          <div ng-if="!commands">
+            <div class="card">
+              <div class="card-body">
+                <h4>Nothing to see here</h4>
+              </div>
+            </div>
+          </div>
+          </div>
           <div ng-repeat="command in commands" style="padding-bottom: 30px">
             <div class="card">
               <div class="card-body">
