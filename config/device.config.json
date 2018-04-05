@@ -9,10 +9,8 @@
   "privateKey": "/home/rlucas/yonomi/thincloud-test-device/certs/private.pem.key",
   "clientCert": "/home/rlucas/yonomi/thincloud-test-device/certs/certificate.pem.crt",
   "caCert": "/home/rlucas/yonomi/thincloud-test-device/rootCA.pem",
-  "iotConnection": {
-    "shadow": true,
-    "port": 8883,
-    "host": "a30sls2kwzsz93.iot.us-west-2.amazonaws.com",
-    "region": "us-west-2"
-  }
+  "shadow": true,
+  "port": 8883,
+  "host": "a30sls2kwzsz93.iot.us-west-2.amazonaws.com",
+  "region": "us-west-2"
 }
