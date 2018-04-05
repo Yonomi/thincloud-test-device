@@ -75,16 +75,16 @@
           <button  type="submit" class="btn btn-primary float-right" ng-click="sendRequest(requestUrl, requestPayload)" ng-disabled="requestUrl == null">Submit</button>
         </div>
 
-        <div ng-if="currentTab =='commands'" ng-controller="commandCtlr">
-          <div ng-if="!commands">
+        <div ng-if="currentTab === 'commands'" ng-controller="commandCtlr">
+          <div ng-if="commands.length === 0 || !commands">
             <div class="card">
               <div class="card-body">
                 <h4>Nothing to see here</h4>
               </div>
             </div>
           </div>
-          </div>
-          <div ng-repeat="command in commands" style="padding-bottom: 30px">
+
+          <div ng-if="commands.length > 0" ng-repeat="command in commands" style="padding-bottom: 30px">
             <div class="card">
               <div class="card-body">
                 <div class="float-left">
