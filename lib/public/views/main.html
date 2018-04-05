@@ -19,6 +19,14 @@
           <span class="badge badge-danger" ng-if="!device.isCommissioned"> Offline</span>
         </div>
       </div>
+      <div class="card-footer" ng-if="device.state">
+        <div>
+          <strong>Device State:</strong>
+        </div>
+        <div>
+          <span class="text-muted">{{angular.json(device.state)}}</span>
+        </div>
+      </div>
     </div>
     <div class="" style="padding-top:30px">
       <ul class="nav nav-tabs">
@@ -29,10 +37,10 @@
           <button type="button" class="nav-link"  ng-click="setTab('commands')" >Commands</button>
         </li>
         <li class="nav-item">
-          <button type="button" class="nav-link"  ng-click="setTab('storage')" >Storage</button>
+          <button type="button" class="nav-link" ng-hide=true ng-click="setTab('storage')" >Storage</button>
         </li>
         <li class="nav-item">
-          <button type="button" class="nav-link" ng-click="setTab('logs')" >Logs</button>
+          <button type="button" class="nav-link" ng-hide=true ng-click="setTab('logs')" >Logs</button>
         </li>
       </ul>
 
