@@ -13,7 +13,8 @@ function getDefaultDeviceConfig() {
   const certs = { caCert, clientCert, privateKey };
 
   const readCerts = Object.keys(certs).reduce((acc, key) => {
-    acc[key] = fs.readFileSync(certs[key], 'utf-8');
+    const file = fs.readFileSync(certs[key], 'utf-8');
+    acc[key] = Buffer.from(file);
     return acc;
   }, {});
 

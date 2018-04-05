@@ -90,8 +90,12 @@ if (!requiredKeys.every(rk => configKeys.indexOf(rk) !== -1)) {
 const files = configKeys.reduce((acc, key) => {
   if (key.match(/Key/)) {
     let filePath = configFile[key];
-    if (filePath.match(/BEGIN/) && filePath.match(/END/)) {
+    if (Buffer.isBuffer(filePath)) {
       acc[key] = filePath;
+      return acc;
+    }
+    else if (typeof(filePath) === 'string' && filePath.match(/BEGIN/) && filePath.match(/END/)) {
+      acc[key] = Buffer.from(filePath);
       return acc;
     }
     else if (!path.isAbsolute(filePath)) {
@@ -100,7 +104,8 @@ const files = configKeys.reduce((acc, key) => {
         return displayError('Can\'t find ' + key + '. Please make sure it\'s an absolute path and file exists.');
       }
     } else {
-      acc[key] = fs.readFileSync(filePath, { encoding: 'utf8' });
+      const file = fs.readFileSync(filePath, { encoding: 'utf8' });
+      acc[key] = Buffer.from(file);
     }
   }
   return acc;
@@ -111,7 +116,7 @@ const configuration = Object.assign(configFile, files);
 // Now run the test device program
 const thincloudDeviceConfig = dConfig.create(configuration);
 
-const workerId = Math.floor(Math.random() * 1000000);
+const workerId = Math.floor(Math.random() * 100);
 const workerLogger = logger.child({workerId});
 workerLogger.info({workerId}, 'start worker');
 
@@ -121,11 +126,17 @@ let deviceManager = new DeviceManager({
   logger: workerLogger,
 });
 
-const app = new WebApp(deviceManager);
-if (program.port) {
-  app.app.set('port', program.port);
-}
+deviceManager.init()
+.then((data) => {
+  workerLogger.warn({data}, 'device init');
+  const app = new WebApp(deviceManager);
+  if (program.port) {
+    app.app.set('port', program.port);
+  }
+  app.start();
+  console.log('Application running at http://localhost:8082');
+  opn('http://localhost:8082');
+}, (err) => {
+  workerLogger.error({err}, 'device exception');
+})
 
-app.start();
-console.log('Application running at http://localhost:8082');
-opn('http://localhost:8082');
