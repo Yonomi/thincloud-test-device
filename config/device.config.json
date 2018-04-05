@@ -1,6 +1,6 @@
 {
   "deviceType": "br400",
-  "physicalId": "10000",
+  "physicalId": "1337",
   "requestTimeout": 5000,
   "timeoutCommission": 40000,
   "log": {

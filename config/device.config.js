@@ -4,12 +4,13 @@
 const deviceConfig = require('./device.config.json');
 const fs = require('fs');
 const path = require('path');
-let rootCa = fs.readFileSync(path.join(__dirname, "../rootCA.pem"), "utf-8");
+let rootCa = fs.readFileSync(path.join(__dirname, '../rootCA.pem'), 'utf-8');
 // endregion
 
 class Config {
-  constructor(connectionDetails, physicalId, deviceType, opts){
-    if(!opts) opts = {};
+
+  constructor(connectionDetails, physicalId, deviceType, opts) {
+    if (!opts) opts = {};
     this.host = connectionDetails.host || null;
     this.region = connectionDetails.region || null;
     this.port = connectionDetails.port || 8883;
@@ -36,7 +37,7 @@ class Config {
     };
   }
 
-  toJSON(){
+  toJSON() {
     return {
       clientCert: new Buffer(this.clientCert),
       privateKey: new Buffer(this.privateKey),
@@ -46,7 +47,7 @@ class Config {
       clientId: `${this.deviceType}_${this.physicalId}`,
       physicalId: this.physicalId,
       deviceType: this.deviceType
-    }
+    };
   }
 
 }

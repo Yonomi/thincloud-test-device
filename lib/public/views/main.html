@@ -24,7 +24,7 @@
 
         </div>
       </div>
-      <div class="card-body" ng-show="device.state !== {}">
+      <div class="card-body" ng-show="device.state">
         <div>
           <h4>Device State:</h4>
         </div>
@@ -110,16 +110,9 @@
           </div>
         </div>
 
-        <div ng-if="currentTab == 'state'" ng-controller="deviceStateCtlr">
-          <div ng-repeat="items in storageItems" style="padding-bottom: 30px">
-            <div class="card">
-              <div class="card-block">
-                <div class="float-left">
-                  {{items}}
-                </div>
-              </div>
-            </div>
-          </div>
+        <div ng-if="currentTab == 'state'" ng-controller="mainCtlr">
+          <button type="submit" class="btn btn-success" ng-click="updateState({powerState: true})" ng-show="!device.state.powerState || device.state == {}">ON</button>
+          <button type="submit" class="btn btn-danger" ng-click="updateState({powerState: false})" ng-show="device.state.powerState">OFF</button>
         </div>
 
         <div ng-if="currentTab == 'storage'" ng-controller="storageCtlr">
