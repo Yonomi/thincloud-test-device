@@ -17,6 +17,9 @@
     "node": "6.10.x",
     "npm": "5.x.x"
   },
+  "bin": {
+    "thincloud-test-device": "./bin/thincloud-test-device"
+  },
   "main": "lib/device.js",
   "scripts": {
     "bithound": "bithound check ${BITHOUND_TOKEN}",
@@ -33,17 +36,18 @@
   },
   "dependencies": {
     "@yonomi/thincloud-device-sdk": "git+https://f0646aea2908884e669ae1c33c1363f020bb4da8:x-oauth-basic@github.com/Yonomi/thincloud-device-sdk.git#develop",
+    "aws-sdk": "^2.7.13",
     "bluebird": "3.5.0",
     "body-parser": "1.17.2",
+    "bower": "^1.7.10",
     "bunyan": "1.8.10",
+    "commander": "2.15.1",
     "ejs": "2.5.6",
     "express": "4.15.3",
     "helmet": "3.6.1",
-    "throng": "4.0.0",
-    "uuid-1345": "0.99.6",
     "nconf": "^0.8.4",
-    "aws-sdk": "^2.7.13",
-    "bower": "^1.7.10"
+    "throng": "4.0.0",
+    "uuid-1345": "0.99.6"
   },
   "devDependencies": {
     "bithound": "1.7.0",

@@ -1,0 +1,104 @@
+#!/usr/bin/env node
+
+const program = require('commander');
+const fs = require('fs');
+const path = require('path');
+
+const Device = require('../lib/device');
+const WebApp = require('../lib/app');
+
+program
+  .version('1.0.0', '-v, --version')
+  .description('A CLI Tool for running a Thincloud Test Device')
+  .option('-c, --config [config_file]', 'Configuration File to Use')
+  .option('-s, --create-config', 'Create a starter configuration file')
+  .option('-p, --port', 'Set port for test device server [default is 8082]')
+  .on('--help', () => {
+    console.log('  Example:');
+    console.log();
+    console.log('    $ thincloud-test-device -c /path/to/config_file.json');
+    console.log();
+    console.log('  Sample Config File:');
+    console.log();
+    console.log('  {');
+    console.log('    "privateKey": "/path/to/private.key",');
+    console.log('    "publicKey": "/path/to/public.key",');
+    console.log('    "physicalId": "00:ED:98:45:RR",');
+    console.log('    "deviceType": "LIGHT"');
+    console.log('  }');
+    console.log();
+  })
+  .parse(process.argv);
+
+if (program.createConfig) {
+  const filePath = path.join(process.cwd(), 'sample_device_config.json');
+  const sampleConfig = {
+    privateKey: 'path/to/private.key',
+    publicKey: 'path/to/public.key',
+    physicalId: 'PHYSICAL_ID',
+    deviceType: 'DEVICE_TYPE'
+  };
+  fs.writeFileSync(filePath, JSON.stringify(sampleConfig, null, 2));
+  process.exit(0);
+}
+
+function displayError(msg) {
+  console.log();
+  console.error('--------------------------------------------');
+  console.error('                 ERROR');
+  console.error('   ' + msg);
+  console.error('--------------------------------------------');
+  program.help();
+}
+
+if (!program.config) {
+  console.log(program);
+  return displayError('Missing required configuration file.');
+}
+
+if (!program.config.match(/\.json$/)) {
+  return displayError('Configuration file should be JSON format.');
+}
+
+let configFilePath = program.config;
+
+if (!path.isAbsolute(program.config)) {
+  configFilePath = path.join(process.cwd(), program.config);
+}
+
+const configFile = require(configFilePath);
+
+const requiredKeys = [
+  'privateKey', 'publicKey', 'physicalId', 'deviceType'
+];
+const configKeys = Object.keys(configFile);
+
+if (!requiredKeys.every(rk => configKeys.indexOf(rk) !== -1)) {
+  const missingKeys = requiredKeys.filter(rk => configKeys.indexOf(rk) === -1);
+  const msg = 'Missing configuration for [ ' + missingKeys.join(', ') + ' ]';
+  return displayError(msg);
+}
+
+const configuration = configKeys.reduce((acc, key) => {
+  if (key.match(/Key/)) {
+    let filePath = configFile[key];
+    if (!path.isAbsolute(configFile[key])) {
+      filePath = path.join(configFilePath, configFile[key]);
+      if (!fs.existsSync(filePath)) {
+        return displayError('Can\'t find ' + key + '. Please make sure it\'s an absolute path and file exists.');
+      }
+    }
+    acc[key] = fs.readFileSync(filePath, { encoding: 'utf8' });
+  }
+  return acc;
+}, {});
+
+// Now run the test device program
+const thincloudDevice = new Device(configuration);
+
+const app = new WebApp(thincloudDevice);
+if (program.port) {
+  app.app.set('port', program.port);
+}
+
+app.start();
