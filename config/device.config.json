@@ -6,11 +6,9 @@
   "log": {
     "level": "trace"
   },
-  "certs": {
-    "keyPath": "certs/private.pem.key",
-    "certPath": "certs/certificate.pem.crt",
-    "caPath": "rootCA.pem"
-  },
+  "privateKey": "/home/rlucas/yonomi/thincloud-test-device/certs/private.pem.key",
+  "clientCert": "/home/rlucas/yonomi/thincloud-test-device/certs/certificate.pem.crt",
+  "caCert": "/home/rlucas/yonomi/thincloud-test-device/rootCA.pem",
   "iotConnection": {
     "shadow": true,
     "port": 8883,

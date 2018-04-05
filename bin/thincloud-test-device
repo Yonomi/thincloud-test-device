@@ -3,9 +3,13 @@
 const program = require('commander');
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 
 const Device = require('../lib/device');
+const DeviceManager = require('../lib/device.manager');
 const WebApp = require('../lib/app');
+const logger = require('../lib/utils/logger');
+const dConfig = require('../config/device.config');
 
 program
   .version('1.0.0', '-v, --version')
@@ -22,7 +26,8 @@ program
     console.log();
     console.log('  {');
     console.log('    "privateKey": "/path/to/private.key",');
-    console.log('    "publicKey": "/path/to/public.key",');
+    console.log('    "clientCert": "/path/to/client.cert",');
+    console.log('    "caCert": "/path/to/rootCA.pem",');
     console.log('    "physicalId": "00:ED:98:45:RR",');
     console.log('    "deviceType": "LIGHT"');
     console.log('  }');
@@ -33,8 +38,9 @@ program
 if (program.createConfig) {
   const filePath = path.join(process.cwd(), 'sample_device_config.json');
   const sampleConfig = {
-    privateKey: 'path/to/private.key',
-    publicKey: 'path/to/public.key',
+    privateKey: '/path/to/private.key',
+    publicKey: '/path/to/public.key',
+    rootCA: '/path/to/rootCA.pem',
     physicalId: 'PHYSICAL_ID',
     deviceType: 'DEVICE_TYPE'
   };
@@ -52,7 +58,6 @@ function displayError(msg) {
 }
 
 if (!program.config) {
-  console.log(program);
   return displayError('Missing required configuration file.');
 }
 
@@ -69,7 +74,7 @@ if (!path.isAbsolute(program.config)) {
 const configFile = require(configFilePath);
 
 const requiredKeys = [
-  'privateKey', 'publicKey', 'physicalId', 'deviceType'
+  'privateKey', 'clientCert', 'physicalId', 'deviceType', 'caCert'
 ];
 const configKeys = Object.keys(configFile);
 
@@ -79,24 +84,41 @@ if (!requiredKeys.every(rk => configKeys.indexOf(rk) !== -1)) {
   return displayError(msg);
 }
 
-const configuration = configKeys.reduce((acc, key) => {
+const files = configKeys.reduce((acc, key) => {
   if (key.match(/Key/)) {
     let filePath = configFile[key];
-    if (!path.isAbsolute(configFile[key])) {
+    if (filePath.match(/BEGIN/) && filePath.match(/END/)) {
+      acc[key] = filePath;
+      return acc;
+    }
+    else if (!path.isAbsolute(filePath)) {
       filePath = path.join(configFilePath, configFile[key]);
       if (!fs.existsSync(filePath)) {
         return displayError('Can\'t find ' + key + '. Please make sure it\'s an absolute path and file exists.');
       }
+    } else {
+      acc[key] = fs.readFileSync(filePath, { encoding: 'utf8' });
     }
-    acc[key] = fs.readFileSync(filePath, { encoding: 'utf8' });
   }
   return acc;
 }, {});
 
-// Now run the test device program
-const thincloudDevice = new Device(configuration);
+const configuration = Object.assign(configFile, files);
 
-const app = new WebApp(thincloudDevice);
+// Now run the test device program
+const thincloudDeviceConfig = dConfig.create(configuration);
+
+const workerId = Math.floor(Math.random() * 1000000);
+const workerLogger = logger.child({workerId});
+workerLogger.info({workerId}, 'start worker');
+
+let deviceManager = new DeviceManager({
+  workerId: workerId,
+  hostName: process.env.HOST || 'ThincloudTestDevice',
+  logger: workerLogger,
+});
+
+const app = new WebApp(deviceManager);
 if (program.port) {
   app.app.set('port', program.port);
 }

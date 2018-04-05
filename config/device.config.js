@@ -1,56 +1,76 @@
 'use strict';
 
-// region imports
-const deviceConfig = require('./device.config.json');
 const fs = require('fs');
 const path = require('path');
-let rootCa = fs.readFileSync(path.join(__dirname, "../rootCA.pem"), "utf-8");
-// endregion
 
-class Config {
-  constructor(connectionDetails, physicalId, deviceType, opts){
-    if(!opts) opts = {};
-    this.host = connectionDetails.host || null;
-    this.region = connectionDetails.region || null;
-    this.port = connectionDetails.port || 8883;
-    this.clientId = opts.clientId || null;
-    this.physicalId = physicalId;
-    this.deviceType = deviceType;
-  }
+// For caching the device config
+let device = {};
 
-  get device() {
-    return {
-      keyPath: deviceConfig.certs.keyPath,
-      certPath: deviceConfig.certs.certPath,
-      caPath: deviceConfig.certs.caPath,
-      clientId: `${deviceConfig.deviceType}_${deviceConfig.physicalId}`,
-      physicalId: deviceConfig.physicalId,
-      deviceType: deviceConfig.deviceType,
-      shadow: deviceConfig.iotConnection.shadow,
-      host: this.host || deviceConfig.iotConnection.host,
-      port: this.port || deviceConfig.iotConnection.port,
-      region: this.region || deviceConfig.iotConnection.region,
-      timeoutCommission: deviceConfig.timeoutCommission,
-      timeoutRequest: deviceConfig.timeoutRequest,
-      keepalive: 1800
-    };
-  }
+function getDefaultDeviceConfig() {
+  const config = require('./device.config.json');
 
-  toJSON(){
-    return {
-      clientCert: new Buffer(this.clientCert),
-      privateKey: new Buffer(this.privateKey),
-      caCert: new Buffer(rootCa),
-      region: this.region ? this.region : deviceConfig.iotConnection.region,
-      host: deviceConfig.iotConnection.host,
-      clientId: `${this.deviceType}_${this.physicalId}`,
-      physicalId: this.physicalId,
-      deviceType: this.deviceType
-    }
-  }
+  const { caCert, clientCert, privateKey } = config;
+  const certs = { caCert, clientCert, privateKey };
 
+  const readCerts = Object.keys(certs).reduce((acc, key) => {
+    acc[key] = fs.readFileSync(certs[key], 'utf-8');
+    return acc;
+  }, {});
+
+  return Object.assign(config, readCerts);
 }
 
-// region exports
-module.exports = Config;
-// endregion
+const defaultDeviceConfig = getDefaultDeviceConfig();
+
+// Doing it this way in order to enable 
+// the configuration to be cached
+module.exports = {
+
+  create: function create(connectionDetails, deviceConfig) {
+    const defaults = {
+      port: 8883,
+      keepalive: 1800
+    };
+
+    device = Object.assign(
+      defaults,
+      defaultDeviceConfig,
+      deviceConfig,
+      connectionDetails
+    );
+    this.setClientId(device);
+  },
+
+  // Handle special case of clientId
+  setClientId: function setClientId(kv) {
+    const keys = Object.keys(kv);
+    if (
+      keys.indexOf('deviceType') !== -1 && 
+      keys.indexOf('physicalId') !== -1
+    ) {
+      device.clientId = `${kv.deviceType}_${kv.physicalId}`;
+    }
+    return device;
+  },
+
+  get: function get() {
+    return device;
+  },
+
+  set: function set(key, val) {
+    device[key] = val;
+    return device;
+  },
+
+  // Takes a JSObject/KeyValue Pairs
+  update: function update(kv) {
+    this.setClientId(kv);
+    const keys = Object.keys(kv);
+
+    keys.forEach(key => {
+      device[key] = kv[key];
+    });
+    return device;
+  }
+
+};
