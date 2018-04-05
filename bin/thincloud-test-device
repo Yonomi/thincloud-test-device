@@ -134,8 +134,9 @@ deviceManager.init()
     app.app.set('port', program.port);
   }
   app.start();
-  console.log('Application running at http://localhost:8082');
-  opn('http://localhost:8082');
+  const port = app.app.get('port');
+  console.log(`Application running at http://localhost:${port}`);
+  opn(`http://localhost:${port}`);
 }, (err) => {
   workerLogger.error({err}, 'device exception');
 })
