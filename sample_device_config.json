@@ -1,6 +1,7 @@
 {
-  "privateKey": "path/to/private.key",
-  "publicKey": "path/to/public.key",
+  "privateKey": "/path/to/private.key",
+  "publicKey": "/path/to/public.key",
+  "rootCA": "/path/to/rootCA.pem",
   "physicalId": "PHYSICAL_ID",
   "deviceType": "DEVICE_TYPE"
 }

@@ -5,6 +5,8 @@ const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 
+const opn = require('opn');
+
 const Device = require('../lib/device');
 const DeviceManager = require('../lib/device.manager');
 const WebApp = require('../lib/app');
@@ -39,8 +41,8 @@ if (program.createConfig) {
   const filePath = path.join(process.cwd(), 'sample_device_config.json');
   const sampleConfig = {
     privateKey: '/path/to/private.key',
-    publicKey: '/path/to/public.key',
-    rootCA: '/path/to/rootCA.pem',
+    clientCert: '/path/to/public.key',
+    caCert: '/path/to/rootCA.pem',
     physicalId: 'PHYSICAL_ID',
     deviceType: 'DEVICE_TYPE'
   };
@@ -124,3 +126,5 @@ if (program.port) {
 }
 
 app.start();
+console.log('Application running at http://localhost:8082');
+opn('http://localhost:8082');
