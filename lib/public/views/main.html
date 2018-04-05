@@ -15,8 +15,13 @@
 
         </div>
         <div class="float-right">
-          <span class="badge badge-success" ng-if="device.isCommissioned" >Online </span>
-          <span class="badge badge-danger" ng-if="!device.isCommissioned"> Offline</span>
+          <span class="badge badge-success" ng-if="device.isConnected" >Online </span>
+          <span class="badge badge-danger" ng-if="!device.isConnected"> Offline</span>
+          <span class="badge badge-success" ng-if="device.isCommissioned" > Commissioned </span>
+          <span class="badge badge-danger" ng-if="!device.isCommissioned"> Commissioned </span>
+        </div>
+        <div class="float-right">
+
         </div>
       </div>
       <div class="card-footer" ng-if="device.state">
