@@ -76,7 +76,7 @@
         <div ng-if="currentTab =='commands'" ng-controller="commandCtlr">
           <div ng-repeat="command in commands" style="padding-bottom: 30px">
             <div class="card">
-              <div class="card-block">
+              <div class="card-body">
                 <div class="float-left">
                   <h4>Method: {{command.name}}</h4>
                   <div class="small">Id: {{command.commandId}}</div>
@@ -85,6 +85,8 @@
                 </div>
                 <div class="float-right">
                   <span class="badge badge-primary" ng-if="command.state == 'PENDING'">Pending</span>
+                  <span class="badge badge-danger" ng-if="command.state == 'FAILED'">Failed</span>
+                  <span class="badge badge-success" ng-if="command.state == 'SUCCESSFUL'">Pending</span>
                 </div>
               </div>
             </div>
