@@ -111,8 +111,9 @@
         </div>
 
         <div ng-if="currentTab == 'state'">
-          <button type="submit" class="btn btn-success" ng-click="updateState({powerState: true})" ng-show="!device.state.powerState || device.state == {}">ON</button>
-          <button type="submit" class="btn btn-danger" ng-click="updateState({powerState: false})" ng-show="device.state.powerState">OFF</button>
+          <h4>Set powerState:</h4>
+          <button type="submit" class="btn btn-success" ng-click="updateState({powerState: true})" ng-disabled="device.state.powerState">ON | true</button>
+          <button type="submit" class="btn btn-danger" ng-click="updateState({powerState: false})" ng-disabled="!device.state.powerState || device.state == {}">OFF | false</button>
         </div>
 
         <div ng-if="currentTab == 'storage'" ng-controller="storageCtlr">
