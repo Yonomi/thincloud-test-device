@@ -48,8 +48,9 @@ textarea {
   background: #ffffffbf;
 }
 
-
-
+pre, code {
+  margin-bottom: 0;
+}
 
 @keyframes spin {
   0% { transform: rotate(0deg); }
