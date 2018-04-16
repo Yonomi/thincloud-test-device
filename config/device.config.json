@@ -6,25 +6,11 @@
   "log": {
     "level": "trace"
   },
-<<<<<<< HEAD
-  "privateKey": "/home/rlucas/yonomi/thincloud-test-device/certs/private.pem.key",
-  "clientCert": "/home/rlucas/yonomi/thincloud-test-device/certs/certificate.pem.crt",
-  "caCert": "/home/rlucas/yonomi/thincloud-test-device/rootCA.pem",
+  "privateKey": "/absolute/path/to/certs/private.pem.key",
+  "clientCert": "/absolute/path/to/certs/certificate.pem.crt",
+  "caCert": "/absolute/path/to/rootCA.pem",
   "shadow": true,
   "port": 8883,
-  "host": "a30sls2kwzsz93.iot.us-west-2.amazonaws.com",
+  "host": "__update_me__.iot.us-west-2.amazonaws.com",
   "region": "us-west-2"
-=======
-  "certs": {
-    "keyPath": "certs/private.pem.key",
-    "certPath": "certs/certificate.pem.crt",
-    "caPath": "rootCA.pem"
-  },
-  "iotConnection": {
-    "host": "__update_me__.iot.us-west-2.amazonaws.com",
-    "region": "us-west-2",
-    "shadow": true,
-    "port": 8883
-  }
->>>>>>> master
 }
