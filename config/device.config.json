@@ -1,6 +1,6 @@
 {
-  "deviceType": "br400",
-  "physicalId": "10000",
+  "deviceType": "my_test_type",
+  "physicalId": "123456",
   "requestTimeout": 5000,
   "timeoutCommission": 40000,
   "log": {
@@ -12,9 +12,9 @@
     "caPath": "rootCA.pem"
   },
   "iotConnection": {
+    "host": "__update_me__.iot.us-west-2.amazonaws.com",
+    "region": "us-west-2",
     "shadow": true,
-    "port": 8883,
-    "host": "a30sls2kwzsz93.iot.us-west-2.amazonaws.com",
-    "region": "us-west-2"
+    "port": 8883
   }
 }
