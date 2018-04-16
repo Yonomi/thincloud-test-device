@@ -7,3 +7,5 @@ lib/public/libs
 node_modules
 
 certs/*
+
+sample_device_config.json
