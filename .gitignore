@@ -3,3 +3,7 @@
 .idea/watcherTasks.xml
 
 lib/public/libs
+
+node_modules
+
+certs/*

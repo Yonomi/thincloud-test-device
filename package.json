@@ -35,8 +35,7 @@
     "postinstall": "bower install"
   },
   "dependencies": {
-    "@yonomi/thincloud-device-sdk": "git+https://f0646aea2908884e669ae1c33c1363f020bb4da8:x-oauth-basic@github.com/Yonomi/thincloud-device-sdk.git#develop",
-    "aws-sdk": "^2.7.13",
+    "@yonomi/thincloud-device-sdk": "git+ssh://git@github.com/Yonomi/thincloud-device-sdk.git#develop",
     "bluebird": "3.5.0",
     "body-parser": "1.17.2",
     "bower": "^1.7.10",

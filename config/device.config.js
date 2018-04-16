@@ -2,6 +2,23 @@
 
 const fs = require('fs');
 const path = require('path');
+<<<<<<< HEAD
+=======
+let rootCa = fs.readFileSync(path.join(__dirname, '../rootCA.pem'), 'utf-8');
+// endregion
+
+class Config {
+
+  constructor(connectionDetails, physicalId, deviceType, opts) {
+    if (!opts) opts = {};
+    this.host = connectionDetails.host || null;
+    this.region = connectionDetails.region || null;
+    this.port = connectionDetails.port || 8883;
+    this.clientId = opts.clientId || null;
+    this.physicalId = physicalId;
+    this.deviceType = deviceType;
+  }
+>>>>>>> master
 
 // For caching the device config
 let device = {};
@@ -33,6 +50,7 @@ module.exports = {
       keepalive: 1800
     };
 
+<<<<<<< HEAD
     device = Object.assign(
       defaults,
       defaultDeviceConfig,
@@ -53,6 +71,20 @@ module.exports = {
     }
     return device;
   },
+=======
+  toJSON() {
+    return {
+      clientCert: new Buffer(this.clientCert),
+      privateKey: new Buffer(this.privateKey),
+      caCert: new Buffer(rootCa),
+      region: this.region ? this.region : deviceConfig.iotConnection.region,
+      host: deviceConfig.iotConnection.host,
+      clientId: `${this.deviceType}_${this.physicalId}`,
+      physicalId: this.physicalId,
+      deviceType: this.deviceType
+    };
+  }
+>>>>>>> master
 
   get: function get() {
     return device;
