@@ -1,0 +1,142 @@
+<div ng-controller="mainCtlr">
+  <div>
+    <h4>Device Information</h4>
+    <div class="card">
+      <div class="card-header">
+        <div class="float-left">
+          <div>
+            <strong>Device Type: </strong> <span class="text-muted">{{device.devicetype}}</span>
+            <strong>physicalId: </strong> <span class="text-muted">{{device.physicalId}}</span>
+          </div>
+
+          <div ng-if="device.isCommissioned">
+            <strong>DeviceId: </strong> <span class="text-muted">{{device.deviceId}}</span>
+          </div>
+
+        </div>
+        <div class="float-right">
+          <span class="badge badge-success" ng-if="device.isConnected" >Online </span>
+          <span class="badge badge-danger" ng-if="!device.isConnected"> Offline</span>
+          <span class="badge badge-success" ng-if="device.isCommissioned" > Commissioned </span>
+          <span class="badge badge-danger" ng-if="!device.isCommissioned"> Commissioned </span>
+        </div>
+        <div class="float-right">
+
+        </div>
+      </div>
+      <div class="card-body" ng-show="device.state">
+        <div>
+          <h4>Device State:</h4>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <pre>{{ device.state | json }}</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="" style="padding-top:30px">
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a  class="nav-link" ng-class="{'active': currentTab === 'requests'}" ng-click="setTab('requests')" >Requests</a>
+        </li>
+        <li class="nav-item">
+          <a  class="nav-link" ng-class="{'active': currentTab === 'commands'}"  ng-click="setTab('commands')" >Commands</a>
+        </li>
+        <li class="nav-item">
+          <a  class="nav-link" ng-class="{'active': currentTab === 'state'}"  ng-click="setTab('state')" >Update State</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" ng-class="{'active': currentTab === 'storage'}" ng-hide=true ng-click="setTab('storage')" >Storage</a>
+        </li>
+        <li class="nav-item">
+          <a  class="nav-link" ng-class="{'active': currentTab === 'logs'}" ng-hide=true ng-click="setTab('logs')" >Logs</a>
+        </li>
+      </ul>
+
+      <div style="padding-top: 30px" >
+        <div class="container" ng-if="currentTab == 'requests'" ng-controller="requestCtlr">
+          <div class=""></div>
+          <div class="form-group row">
+            <label for="requestUrl" class="col-sm-2 col-form-label">Method Name</label>
+            <div class="col-sm-10">
+              <input ng-model="requestUrl" type="text" class="form-control" id="requestUrl" placeholder="get /devices">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="requestPayload" class="col-sm-2 col-form-label">Request Payload </label>
+            <div class="col-sm-10">
+              <textarea ng-model="requestPayload" class="form-control" id="requestPayload" rows="3">{}</textarea>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="responsePayload" class="col-sm-2 col-form-label">Response Payload </label>
+            <div class="col-sm-10">
+              <div class="card">
+                <div class="card-header">
+                  <pre id="responsePayload" rows="3" disabled>{{responsePayload | json}}</pre>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button  type="submit" class="btn btn-primary float-right" ng-click="sendRequest(requestUrl, requestPayload)" ng-disabled="requestUrl == null">Submit</button>
+        </div>
+
+        <div ng-if="currentTab === 'commands'" ng-controller="commandCtlr">
+          <div ng-if="commands.length === 0 || !commands">
+            <div class="card">
+              <div class="card-body">
+                <h4>Nothing to see here</h4>
+              </div>
+            </div>
+          </div>
+
+          <div ng-if="commands.length > 0" ng-repeat="command in commands" style="padding-bottom: 30px">
+            <div class="card">
+              <div class="card-body">
+                <div class="float-left">
+                  <h4>Method: {{command.name}}</h4>
+                  <div class="small">Id: {{command.commandId}}</div>
+                  <div class="small">UserId: {{command.userId}}</div>
+                  <div class="small">Request: {{command.request}}</div>
+                </div>
+                <div class="float-right">
+                  <span class="badge badge-primary" ng-if="command.state == 'PENDING'">Pending</span>
+                  <span class="badge badge-danger" ng-if="command.state == 'FAILED'">Failed</span>
+                  <span class="badge badge-success" ng-if="command.state == 'SUCCESSFUL'">Successful</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div ng-if="currentTab == 'state'">
+          <h4>Set powerState:</h4>
+          <button type="submit" class="btn btn-success" ng-click="updateState({powerState: true})" ng-disabled="device.state.powerState">ON | true</button>
+          <button type="submit" class="btn btn-danger" ng-click="updateState({powerState: false})" ng-disabled="!device.state.powerState || device.state == {}">OFF | false</button>
+        </div>
+
+        <div ng-if="currentTab == 'storage'" ng-controller="storageCtlr">
+          <div ng-repeat="items in storageItems" style="padding-bottom: 30px">
+            <div class="card">
+              <div class="card-block">
+                <div class="float-left">
+                  {{items}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div ng-if="currentTab == 'logs'">
+          <div>logs</div>
+        </div>
+
+      </div>
+
+
+
+
+    </div>
+  </div>
+</div>

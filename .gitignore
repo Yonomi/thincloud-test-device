@@ -1,0 +1,11 @@
+.idea/modules.xml
+.idea/thincloud-test-device.iml
+.idea/watcherTasks.xml
+
+lib/public/libs
+
+node_modules
+
+certs/*
+
+sample_device_config.json
