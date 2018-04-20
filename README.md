@@ -3,15 +3,16 @@
 Run a virtual device that interfaces with Thincloud
 
 ## Installation
+
 `npm install`
 
 ## Config
+
 Update `config/device.config.json`
 specifically the `iotConnection.host` and adding your `devicetype` and specifying a `physicalId`
 
 Create your device certs and add Cert Authority file
 [AWS IoT](https://us-west-2.console.aws.amazon.com/iot/home?region=us-west-2#/dashboard)
-
 
 ## Usage
 
@@ -20,14 +21,16 @@ Create your device certs and add Cert Authority file
 [Commision](http://localhost:8082/#!/commission)
 
 ## Test
+
 `npm test`
 
 ## Using the CLI tool
 
 ### Install
+
 `$ npm install -g thincloud-test-device`
 
-### Usage
+### CLI
 
 ```
   Usage: thincloud-test-device [options]
