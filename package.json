@@ -34,7 +34,7 @@
     "prettier": "prettier-eslint '{lib,bin,config}/**/*.js' --write"
   },
   "dependencies": {
-    "@yonomi/thincloud-device-sdk": "git+ssh://git@github.com/Yonomi/thincloud-device-sdk.git",
+    "@yonomi/thincloud-node-sdk": "git+https://28dfa457cc665dd07f3226705f63a0a7f71a7ef6:x-oauth-basic@github.com/yonomi/thincloud-node-sdk.git#release/v1.0.0",
     "aws-sdk": "2.224.1",
     "bluebird": "3.5.0",
     "body-parser": "1.17.2",
