@@ -52,6 +52,10 @@
         <li class="nav-item">
           <a  class="nav-link" ng-class="{'active': currentTab === 'logs'}" ng-hide=true ng-click="setTab('logs')" >Logs</a>
         </li>
+        <li class="nav-item">
+          <a  class="nav-link" ng-class="{'active': currentTab === 'relatedDevices'}" ng-click="setTab('relatedDevices')" >Related Devices</a>
+        </li>
+
       </ul>
 
       <div style="padding-top: 30px" >
@@ -131,6 +135,46 @@
         <div ng-if="currentTab == 'logs'">
           <div>logs</div>
         </div>
+
+        <div ng-if="currentTab == 'relatedDevices'" ng-controller="relatedDevicesCtlr">
+          <div class="card">
+            <div class="card-header">
+              Manage Related Devices
+            </div>
+            <div class="card-body">
+              <form>
+                <div class="row">
+                  <div class="col-sm-2">
+                    <input type="text" class="form-control form-control-sm" id="devicetypeId" ng-model="devicetypeId" placeholder="Device Type">
+                  </div>
+                  <div class="col-sm-2">
+                    <input type="text" class="form-control form-control-sm" id="physicalId" ng-model="physicalId" placeholder="PhysicalId">
+                  </div>
+                  <div class="col-sm-4">
+                    <input type="text" class="form-control form-control-sm" id="relatedDeviceId" ng-model="deviceId" placeholder="Device Id">
+                  </div>
+                  <div class="col">
+                    <button type="button" class="btn btn-sm btn-primary float-right" ng-click="addRelatedDevice(relatedDeviceId)">Submit</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div style="padding-top: 30px;">
+            <div class="card">
+              <div class="card-body">
+                <div class="float-left">
+                  <div>DeviceId: </div>
+                </div>
+                <div class="float-right">
+                  <button type="button" class="btn btn-sm btn-danger">Remove</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
 
       </div>
 
