@@ -24,7 +24,6 @@ const clusterConfig = {
 
 throng(clusterConfig);
 
-
 function startMaster() {
   logger.info({WORKERS, HEROKU_INFO}, 'master spawing workers');
 }
@@ -36,31 +35,28 @@ function startWorker(workerId) {
   let deviceManager = new DeviceManager({
     workerId: workerId,
     hostName: HOST_NAME,
-    logger: workerLogger,
+    logger: workerLogger
   });
-
 
   process.on('SIGINT', () => {});
 
   process.on('SIGTERM', () => {
     workerLogger.warn({workerId}, 'worker exiting...');
-    deviceManager.terminate().then(()=>{
+    deviceManager.terminate().then(() => {
       workerLogger.warn({device: deviceManager.device.deviceId}, 'certificate cleared');
     });
-    setTimeout(()=>{
-      process.exit(0)
-    }, 10000)
+    setTimeout(() => {
+      process.exit(0);
+    }, 10000);
   });
-
-
 
   deviceManager.init()
     .then((data) => {
       workerLogger.warn({data}, 'device init');
-      let app = new WebApp(deviceManager).start()
+      let app = new WebApp(deviceManager).start();
     }, (err) => {
       workerLogger.error({err}, 'device exception');
-    })
+    });
 
 }
 
