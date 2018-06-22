@@ -160,7 +160,7 @@
               <form>
                 <div class="row">
                   <div class="col-sm-2">
-                    <input type="text" class="form-control form-control-sm" id="devicetypeId" ng-model="devicetypeId" placeholder="Device Type">
+                    <input type="text" class="form-control form-control-sm" id="deviceType" ng-model="deviceType" placeholder="Device Type">
                   </div>
                   <div class="col-sm-2">
                     <input type="text" class="form-control form-control-sm" id="physicalId" ng-model="physicalId" placeholder="PhysicalId">
@@ -176,14 +176,14 @@
             </div>
           </div>
 
-          <div style="padding-top: 30px;" ng-repeat="device in device.relatedDevices">
+          <div style="padding-top: 30px;" ng-repeat="(key, value) in relatedDevicesMap">
             <div class="card">
               <div class="card-body">
                 <div class="float-left">
                   <div>DeviceId: {{device.deviceId}}</div>
                 </div>
                 <div class="float-right">
-                  <button type="button" class="btn btn-sm btn-danger">Remove</button>
+                  <button type="button" class="btn btn-sm btn-danger" ng-click="removeRelatedDevice(value)">Remove</button>
                 </div>
               </div>
             </div>
