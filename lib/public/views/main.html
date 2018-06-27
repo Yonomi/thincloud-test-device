@@ -176,14 +176,14 @@
             </div>
           </div>
 
-          <div style="padding-top: 30px;" ng-repeat="(key, value) in relatedDevicesMap">
+          <div style="padding-top: 30px;" ng-repeat="device in relatedDevices">
             <div class="card">
               <div class="card-body">
                 <div class="float-left">
                   <div>DeviceId: {{device.deviceId}}</div>
                 </div>
                 <div class="float-right">
-                  <button type="button" class="btn btn-sm btn-danger" ng-click="removeRelatedDevice(value)">Remove</button>
+                  <button type="button" class="btn btn-sm btn-danger" ng-click="removeRelatedDevice(device)">Remove</button>
                 </div>
               </div>
             </div>
