@@ -52,6 +52,10 @@
         <li class="nav-item">
           <a  class="nav-link" ng-class="{'active': currentTab === 'logs'}" ng-hide=true ng-click="setTab('logs')" >Logs</a>
         </li>
+        <li class="nav-item">
+          <a  class="nav-link" ng-class="{'active': currentTab === 'relatedDevices'}" ng-click="setTab('relatedDevices')" >Related Devices</a>
+        </li>
+
       </ul>
 
       <div style="padding-top: 30px" >
@@ -131,6 +135,65 @@
         <div ng-if="currentTab == 'logs'">
           <div>logs</div>
         </div>
+
+        <div ng-if="currentTab == 'relatedDevices'" ng-controller="relatedDevicesCtlr">
+          <div class="card">
+            <div class="card-header">
+              Manage Related Devices
+              <button type="button" class="btn btn-sm btn-default float-right" ng-click="deepSyncRelatedDevices()">Refresh</button>
+            </div>
+            <div class="card-body">
+              <div class="loading-background" ng-if="isLoading">
+                <div class="loader"></div>
+              </div>
+              <div class="alert alert-danger alert-dismissible fade show" role="alert" ng-if="isError">
+                Unable to add related device {{deviceId}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="alert alert-success alert-dismissible fade show" role="alert" ng-if="isSuccess">
+                Successfully added related device {{deviceId}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <form>
+                <div class="row">
+                  <div class="col-sm-2">
+                    <input type="text" class="form-control form-control-sm" id="deviceType" ng-model="deviceType" placeholder="Device Type">
+                  </div>
+                  <div class="col-sm-2">
+                    <input type="text" class="form-control form-control-sm" id="physicalId" ng-model="physicalId" placeholder="PhysicalId">
+                  </div>
+                  <div class="col-sm-4">
+                    <input type="text" class="form-control form-control-sm" id="relatedDeviceId" ng-model="deviceId" placeholder="Device Id">
+                  </div>
+                  <div class="col">
+                    <button type="button" class="btn btn-sm btn-primary float-right" ng-click="addRelatedDevice(relatedDeviceId)">Submit</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div style="padding-top: 30px;" ng-repeat="device in relatedDevices">
+            <div class="card">
+              <div class="card-body">
+                <div class="loading-background" ng-if="device._isLoading">
+                  <div class="loader"></div>
+                </div>
+                <div class="float-left">
+                  <div>DeviceId: {{device.deviceId}}</div>
+                </div>
+                <div class="float-right">
+                  <button type="button" class="btn btn-sm btn-danger" ng-click="removeRelatedDevice(device)">Remove</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
 
       </div>
 

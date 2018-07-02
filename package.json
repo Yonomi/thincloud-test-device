@@ -1,6 +1,6 @@
 {
   "name": "@yonomi/thincloud-test-device",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Yonomi Thincloud Test Device",
   "author": "Yonomi (http://yonomi.co)",
   "license": "SEE LICENSE IN LICENSE",
@@ -34,7 +34,7 @@
     "prettier": "prettier-eslint '{lib,bin,config}/**/*.js' --write"
   },
   "dependencies": {
-    "@yonomi/thincloud-node-sdk": "1.0.0",
+    "@yonomi/thincloud-node-sdk": "1.0.1",
     "aws-sdk": "2.224.1",
     "bluebird": "3.5.0",
     "body-parser": "1.17.2",
@@ -44,6 +44,7 @@
     "ejs": "2.5.6",
     "express": "4.15.3",
     "helmet": "3.6.1",
+    "lodash": "^4.17.10",
     "nconf": "^0.8.4",
     "opn": "5.3.0",
     "throng": "4.0.0",
