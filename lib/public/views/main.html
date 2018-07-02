@@ -180,6 +180,9 @@
           <div style="padding-top: 30px;" ng-repeat="device in relatedDevices">
             <div class="card">
               <div class="card-body">
+                <div class="loading-background" ng-if="device._isLoading">
+                  <div class="loader"></div>
+                </div>
                 <div class="float-left">
                   <div>DeviceId: {{device.deviceId}}</div>
                 </div>
