@@ -48,7 +48,8 @@
     "nconf": "^0.8.4",
     "opn": "5.3.0",
     "throng": "4.0.0",
-    "uuid-1345": "0.99.6"
+    "uuid-1345": "0.99.6",
+    "jsonfile": "^4.0.0"
   },
   "devDependencies": {
     "codecov": "2.2.0",
