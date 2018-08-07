@@ -173,20 +173,49 @@
                     <button type="button" class="btn btn-sm btn-primary float-right" ng-click="addRelatedDevice(relatedDeviceId)">Submit</button>
                   </div>
                 </div>
+                <div class="row" style="margin-top: 20px">
+                  <div class="col-sm-6">
+                    <textarea rows="1" class="form-control state-textarea" ng-model="custom" placeholder="{}"></textarea>
+                  </div>
+                </div>
               </form>
             </div>
           </div>
 
           <div style="padding-top: 30px;" ng-repeat="device in relatedDevices">
             <div class="card">
+              <div class="card-header">
+                <div>
+                  <strong>Device Type: </strong> <span class="text-muted">{{device.devicetypeId}}</span>
+                  <strong>physicalId: </strong> <span class="text-muted">{{device.physicalId}}</span>
+                </div>
+
+                <div>
+                  <strong>DeviceId: </strong> <span class="text-muted">{{device.deviceId}}</span>
+                </div>
+              </div>
               <div class="card-body">
                 <div class="loading-background" ng-if="device._isLoading">
                   <div class="loader"></div>
                 </div>
-                <div class="float-left">
-                  <div>DeviceId: {{device.deviceId}}</div>
+                <div>
+                  <h4>Device State:</h4>
                 </div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <lablel class="label">Current State:</lablel>
+                    <textarea rows="1" disabled class="form-control state-textarea">{{ device.custom }}</textarea>
+                  </div>
+                  <div class="col-sm-6">
+                    <lablel class="label">New State:</lablel>
+                    <textarea rows="1" class="form-control state-textarea" ng-model="device._custom"></textarea>
+                  </div>
+                </div>
+
+              </div>
+              <div class="card-footer">
                 <div class="float-right">
+                  <button type="button" class="btn btn-sm btn-primary" ng-click="update(device)">Update</button>
                   <button type="button" class="btn btn-sm btn-danger" ng-click="removeRelatedDevice(device)">Remove</button>
                 </div>
               </div>
