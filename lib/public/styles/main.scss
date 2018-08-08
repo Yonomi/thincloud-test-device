@@ -20,3 +20,10 @@
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+.state-textarea {
+  min-height: 120px;
+  max-height: 500px;
+  min-width: auto;
+  max-width: auto;
+}
