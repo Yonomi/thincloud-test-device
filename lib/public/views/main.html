@@ -140,7 +140,7 @@
           <div class="card">
             <div class="card-header">
               Manage Related Devices
-              <button type="button" class="btn btn-sm btn-default float-right" ng-click="deepSyncRelatedDevices()">Refresh</button>
+              <button type="button" class="btn btn-sm btn-default float-right" ng-click="deepSyncRelatedDevices()">Refresh All</button>
             </div>
             <div class="card-body">
               <div class="loading-background" ng-if="isLoading">
@@ -175,7 +175,7 @@
                 </div>
                 <div class="row" style="margin-top: 20px">
                   <div class="col-sm-6">
-                    <textarea rows="1" class="form-control state-textarea" ng-model="custom" placeholder="{}"></textarea>
+                    <textarea rows="1" class="form-control state-textarea" ng-model="custom" placeholder="State"></textarea>
                   </div>
                 </div>
               </form>
@@ -186,13 +186,15 @@
             <div class="card">
               <div class="card-header">
                 <div>
-                  <strong>Device Type: </strong> <span class="text-muted">{{device.devicetypeId}}</span>
+                  <strong>Device Type: </strong> <span class="text-muted">{{device.deviceType}}</span>
                   <strong>physicalId: </strong> <span class="text-muted">{{device.physicalId}}</span>
                 </div>
 
                 <div>
                   <strong>DeviceId: </strong> <span class="text-muted">{{device.deviceId}}</span>
                 </div>
+
+                <!--<button type="button" class="btn btn-sm btn-default float-right" ng-click="syncRelatedDevice(device)">Refresh</button>-->
               </div>
               <div class="card-body">
                 <div class="loading-background" ng-if="device._isLoading">
