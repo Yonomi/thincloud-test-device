@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="pi-boulder-local">
+    <serverData>
+      <paths name="pi-boulder-local">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/pi/thincloud-test-device" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+          <excludedPaths>
+            <excludedPath local="true" path="$PROJECT_DIR$/node_modules" />
+            <excludedPath local="true" path="$PROJECT_DIR$/lib/public/libs" />
+          </excludedPaths>
+        </serverdata>
+      </paths>
+      <paths name="pi-home-local">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/pi/thincloud-test-device" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+          <excludedPaths>
+            <excludedPath local="true" path="$PROJECT_DIR$/lib/public/libs" />
+            <excludedPath local="true" path="$PROJECT_DIR$/node_modules" />
+          </excludedPaths>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>

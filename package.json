@@ -34,7 +34,7 @@
     "prettier": "prettier-eslint '{lib,bin,config}/**/*.js' --write"
   },
   "dependencies": {
-    "@yonomi/thincloud-node-sdk": "1.0.6",
+    "@yonomi/thincloud-node-sdk": "https://github.com/Yonomi/thincloud-node-sdk.git",
     "aws-sdk": "2.224.1",
     "bluebird": "3.5.0",
     "body-parser": "1.17.2",
@@ -44,12 +44,13 @@
     "ejs": "2.5.6",
     "express": "4.15.3",
     "helmet": "3.6.1",
+    "jsonfile": "^4.0.0",
     "lodash": "^4.17.10",
     "nconf": "^0.8.4",
     "opn": "5.3.0",
+    "rpi-gpio": "^1.0.0",
     "throng": "4.0.0",
-    "uuid-1345": "0.99.6",
-    "jsonfile": "^4.0.0"
+    "uuid-1345": "0.99.6"
   },
   "devDependencies": {
     "codecov": "2.2.0",

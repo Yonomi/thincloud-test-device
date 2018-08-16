@@ -1,17 +1,16 @@
 {
-  "deviceType": "my_test_type",
-  "physicalId": "123456",
+  "deviceType": "br400",
+  "physicalId": "10001",
   "requestTimeout": 5000,
   "timeoutCommission": 40000,
   "log": {
     "level": "trace"
   },
-  "privateKey": "/absolute/path/to/certs/private.pem.key",
-  "clientCert": "/absolute/path/to/certs/certificate.pem.crt",
-  "caCert": "/absolute/path/to/rootCA.pem",
+  "privateKey": "certs-us-west-2/private.pem.key",
+  "clientCert": "certs-us-west-2/certificate.pem.crt",
+  "caCert": "rootCA.pem",
   "shadow": true,
   "port": 8883,
-  "host": "__update_me__.iot.us-west-2.amazonaws.com",
+  "host": "a30sls2kwzsz93.iot.us-west-2.amazonaws.com",
   "region": "us-west-2"
 }
-
