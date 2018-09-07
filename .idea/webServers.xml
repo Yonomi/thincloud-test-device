@@ -2,8 +2,8 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="d0f25c67-fec1-4b29-8676-752534cf6d0d" name="pi-boulder-local" url="http://10.1.10.105">
-        <fileTransfer host="10.1.10.105" port="22" accessType="SFTP">
+      <webServer id="d0f25c67-fec1-4b29-8676-752534cf6d0d" name="pi-boulder-local" url="http://10.1.10.148">
+        <fileTransfer host="10.1.10.148" port="22" accessType="SFTP">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" />
           </advancedOptions>
