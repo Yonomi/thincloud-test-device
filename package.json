@@ -34,7 +34,7 @@
     "prettier": "prettier-eslint '{lib,bin,config}/**/*.js' --write"
   },
   "dependencies": {
-    "@yonomi/thincloud-node-sdk": "1.0.6",
+    "@yonomi/thincloud-node-sdk": "1.0.8",
     "aws-sdk": "2.224.1",
     "bluebird": "3.5.0",
     "body-parser": "1.17.2",
