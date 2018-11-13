@@ -6,9 +6,9 @@
   "log": {
     "level": "trace"
   },
-  "privateKey": "/absolute/path/to/certs/private.pem.key",
-  "clientCert": "/absolute/path/to/certs/certificate.pem.crt",
-  "caCert": "/absolute/path/to/rootCA.pem",
+  "privateKey": "certs/**********-private.pem.key",
+  "clientCert": "certs/**********-certificate.pem.crt",
+  "caCert": "rootCA.pem",
   "shadow": true,
   "port": 8883,
   "host": "__update_me__.iot.us-west-2.amazonaws.com",
