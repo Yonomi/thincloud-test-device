@@ -1,17 +1,17 @@
 {
-  "deviceType": "my_test_type",
-  "physicalId": "123456",
+  "deviceType": "hub",
+  "physicalId": "10000",
   "requestTimeout": 5000,
   "timeoutCommission": 40000,
   "log": {
     "level": "trace"
   },
-  "privateKey": "certs/**********-private.pem.key",
-  "clientCert": "certs/**********-certificate.pem.crt",
+  "privateKey": "certs/8b3021dd17-private.pem.key",
+  "clientCert": "certs/8b3021dd17-certificate.pem.crt",
   "caCert": "rootCA.pem",
   "shadow": true,
   "port": 8883,
-  "host": "__update_me__.iot.us-west-2.amazonaws.com",
+  "host": "a3fakvq39qvu3f-ats.iot.us-west-2.amazonaws.com",
   "region": "us-west-2"
 }
 
